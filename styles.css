@@ -83,7 +83,7 @@ p { margin: 0 0 1em; }
   color: var(--ink); text-decoration: none; padding: .3rem 0; border-bottom: 3px solid transparent;
 }
 .nav-menu a:not(.btn):hover { color: var(--blue); }
-.nav-menu a[aria-current="page"] { color: var(--blue); border-bottom-color: var(--orange); }
+.nav-menu a[aria-current="page"] { color: var(--blue); }
 .nav-toggle { display: none; background: var(--blue); border: 0; border-radius: 10px; padding: 10px; cursor: pointer; }
 .nav-toggle span { display: block; width: 22px; height: 2.5px; background: var(--white); margin: 4px 0; border-radius: 2px; }
 
@@ -349,4 +349,180 @@ p { margin: 0 0 1em; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* =========================================================
+   Animations: hover effects, hero motion and scroll reveal
+   ========================================================= */
+:root {
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --bounce: cubic-bezier(.34, 1.56, .64, 1);
+  --tilt: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+}
+
+@keyframes rise { from { opacity: 0; translate: 0 28px; } to { opacity: 1; translate: 0 0; } }
+@keyframes pop { from { opacity: 0; scale: .85; } to { opacity: 1; scale: 1; } }
+@keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -14px; } }
+@keyframes pulse { 0%, 100% { scale: 1; } 50% { scale: 1.3; } }
+@keyframes drift { 0%, 100% { translate: 0 0; } 50% { translate: 40px 0; } }
+@keyframes ring { from { transform: scale(1); opacity: .55; } to { transform: scale(1.9); opacity: 0; } }
+@keyframes wiggle { 0%, 100% { rotate: 0deg; } 25% { rotate: -12deg; } 75% { rotate: 12deg; } }
+
+/* Scroll reveal (the "js" class is added by script.js, so content shows without JavaScript) */
+.js .reveal:not(.in) { opacity: 0; }
+.reveal.in { animation: rise .8s var(--ease) var(--d, 0s) both; }
+
+/* Buttons: light sweep, lift, icon nudge, press */
+.btn { position: relative; overflow: hidden; isolation: isolate; transition: transform .3s var(--bounce), background .2s, color .2s, border-color .2s, box-shadow .3s; }
+.btn::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: -75%; width: 50%; z-index: -1;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .45), transparent);
+  transform: skewX(-20deg); transition: left .7s var(--ease);
+}
+.btn:hover::before { left: 130%; }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0, 31, 77, .25); }
+.btn-orange:hover { box-shadow: 0 12px 26px rgba(241, 90, 37, .45); }
+.btn:active { transform: translateY(0) scale(.96); }
+.btn .i { transition: transform .35s var(--bounce); }
+.btn:hover .i { transform: translateX(3px) rotate(-10deg) scale(1.15); }
+.link-arrow { transition: gap .25s var(--ease), color .2s; }
+.link-arrow:hover { gap: .75rem; color: var(--orange); }
+
+/* Header: logo bounce and growing underline on menu links */
+.brand img { transition: transform .45s var(--bounce); }
+.brand:hover img { transform: scale(1.06) rotate(-2deg); }
+.nav-menu a:not(.btn) { position: relative; transition: color .2s; }
+.nav-menu a:not(.btn)::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 3px; border-radius: 3px;
+  background: var(--orange); transform: scaleX(0); transform-origin: right; transition: transform .4s var(--ease);
+}
+.nav-menu a:not(.btn):hover::after, .nav-menu a[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
+.topbar a { transition: opacity .2s; }
+.topbar a:hover { opacity: .85; }
+.topbar a:hover .i { animation: wiggle .5s ease; }
+
+/* Hero: entrance, floating cards, moving shapes */
+.hero-grid > div:first-child > *, .page-hero .container > * { animation: rise .9s var(--ease) both; }
+.hero-grid > div:first-child > :nth-child(2), .page-hero .container > :nth-child(2) { animation-delay: .1s; }
+.hero-grid > div:first-child > :nth-child(3), .page-hero .container > :nth-child(3) { animation-delay: .2s; }
+.hero-grid > div:first-child > :nth-child(4) { animation-delay: .3s; }
+.hero-grid > div:first-child > :nth-child(5) { animation-delay: .4s; }
+.hero::after { animation: pulse 3s ease-in-out infinite; }
+.hero::before, .page-hero::after { animation: drift 7s ease-in-out infinite; }
+.hero-art { animation: pop 1s var(--bounce) .3s both; }
+.stack-card { animation: float 6s ease-in-out infinite; transition: transform .45s var(--bounce), box-shadow .45s; }
+.sc-2 { animation-delay: -2s; }
+.sc-3 { animation-delay: -4s; }
+.stack-card:hover { transform: rotate(0deg) scale(1.08); box-shadow: 0 26px 60px rgba(0, 0, 0, .35); z-index: 3; }
+.stack-card .i { transition: transform .5s var(--bounce); }
+.stack-card:hover .i { transform: rotate(-15deg) scale(1.2); }
+.hero-points li { transition: transform .3s var(--bounce); }
+.hero-points li:hover { transform: translateY(-3px); }
+.hero-points li:hover .i { animation: wiggle .5s ease; }
+
+/* Service cards: 3D tilt, cursor glow, colour bar, spinning badge */
+.svc-card { overflow: hidden; transition: transform .4s var(--bounce), box-shadow .4s, border-color .3s; }
+.svc-card::before {
+  content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 6px;
+  background: linear-gradient(90deg, var(--blue), var(--orange)); transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease);
+}
+.svc-card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .3s;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(0, 74, 173, .09), transparent 60%);
+}
+.svc-card:hover { transform: var(--tilt) translateY(-8px); }
+.svc-card:hover::before { transform: scaleX(1); }
+.svc-card:hover::after { opacity: 1; }
+.svc-card .badge { transition: transform .55s var(--bounce), border-radius .4s; }
+.svc-card:hover .badge { transform: rotate(-12deg) scale(1.15); border-radius: 50%; }
+.svc-card h3 { transition: color .25s; }
+.svc-card:hover h3 { color: var(--blue); }
+
+/* Why Bluebutton */
+.why-item { transition: transform .35s var(--bounce); }
+.why-item:hover { transform: translateY(-4px); }
+.why-item .ic { transition: transform .45s var(--bounce), background .3s, color .3s; }
+.why-item:hover .ic { transform: rotate(14deg) scale(1.15); background: var(--blue-deep); color: var(--white); }
+
+/* Audience cards: tilt and growing circle */
+.aud-card { position: relative; overflow: hidden; transition: transform .4s var(--bounce), box-shadow .4s; }
+.aud-card > * { position: relative; z-index: 1; }
+.aud-card::after {
+  content: ""; position: absolute; width: 140px; height: 140px; right: -50px; bottom: -50px; border-radius: 50%;
+  background: rgba(255, 255, 255, .12); transition: transform .6s var(--ease);
+}
+.aud-card:hover { transform: var(--tilt) translateY(-8px); box-shadow: var(--shadow); }
+.aud-card:hover::after { transform: scale(3.2); }
+.aud-card h3 { transition: letter-spacing .35s var(--ease); }
+.aud-card:hover h3 { letter-spacing: .06em; }
+
+/* Steps: number spins */
+.steps li { transition: transform .4s var(--bounce), border-color .3s, box-shadow .3s; }
+.steps li:hover { transform: translateY(-8px); border-color: var(--orange); box-shadow: var(--shadow); }
+.steps li::before { transition: transform .7s var(--bounce); }
+.steps li:hover::before { transform: rotate(360deg) scale(1.12); }
+
+/* Portfolio tiles: lift, zoom, sliding caption arrow */
+.tile { transition: transform .4s var(--bounce), box-shadow .4s; }
+.tile:hover { transform: var(--tilt) translateY(-8px) scale(1.02); box-shadow: var(--shadow); }
+.tile:hover img { transform: scale(1.08); }
+.tile .ph .i { transition: transform .5s var(--bounce), opacity .3s; }
+.tile:hover .ph .i { transform: scale(1.35) rotate(-8deg); opacity: .6; }
+.tile figcaption { transition: padding .35s var(--ease); }
+.tile figcaption::after { content: " →"; display: inline-block; opacity: 0; transform: translateX(-10px); transition: opacity .3s, transform .35s var(--bounce); }
+.tile:hover figcaption { padding-bottom: 1.4rem; }
+.tile:hover figcaption::after { opacity: 1; transform: translateX(4px); }
+.tile.pop { animation: pop .45s var(--bounce) both; }
+.chip { transition: background .2s, color .2s, transform .3s var(--bounce); }
+.chip:hover { transform: translateY(-3px); }
+.chip:active { transform: scale(.94); }
+
+/* Price list */
+.price-item { position: relative; overflow: hidden; transition: transform .35s var(--bounce), border-color .3s, box-shadow .3s; }
+.price-item::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--orange);
+  transform: scaleY(0); transition: transform .35s var(--ease);
+}
+.price-item:hover { transform: translateX(6px); border-color: var(--blue); box-shadow: 0 10px 24px rgba(0, 31, 77, .12); }
+.price-item:hover::before { transform: scaleY(1); }
+.price { display: inline-block; transition: transform .35s var(--bounce); }
+.price-item:hover .price { transform: scale(1.1); }
+.order-btn { transition: color .2s; }
+.order-btn .i { transition: transform .35s var(--bounce); }
+.order-btn:hover { color: var(--orange); }
+.order-btn:hover .i { transform: scale(1.3) rotate(-12deg); }
+.price-group-head .badge { transition: transform .5s var(--bounce); }
+.price-group:hover .price-group-head .badge { transform: rotate(-12deg) scale(1.1); }
+
+/* Social, contact and footer */
+.social-link { transition: background .2s, transform .35s var(--bounce); }
+.social-link:hover { transform: translateX(10px); }
+.social-link .i { transition: transform .45s var(--bounce); }
+.social-link:hover .i { transform: scale(1.25) rotate(-12deg); }
+.contact-card { transition: transform .4s var(--bounce), box-shadow .4s; }
+.contact-card:hover { transform: var(--tilt) translateY(-10px); box-shadow: 0 24px 50px rgba(0, 31, 77, .24); }
+.contact-card .i { transition: transform .5s var(--bounce); }
+.contact-card:hover .i { transform: scale(1.25) rotate(-12deg); }
+.info-row .ic { transition: transform .4s var(--bounce), background .3s, color .3s; }
+.info-row:hover .ic { transform: rotate(-10deg) scale(1.1); background: var(--blue); color: var(--white); }
+.quote-form input, .quote-form select, .quote-form textarea { transition: border-color .2s, box-shadow .25s; }
+.quote-form input:focus, .quote-form select:focus, .quote-form textarea:focus { box-shadow: 0 0 0 4px rgba(0, 74, 173, .15); }
+.cta-band::after { animation: drift 6s ease-in-out infinite; }
+.socials a { transition: background .2s, transform .5s var(--bounce); }
+.socials a:hover { transform: translateY(-4px) rotate(360deg); }
+.site-footer ul a { display: inline-block; transition: transform .25s var(--ease), color .2s; }
+.site-footer ul a:hover { transform: translateX(6px); }
+.footer-logo { transition: transform .45s var(--bounce); }
+.footer-logo:hover { transform: scale(1.05) rotate(-2deg); }
+
+/* Floating WhatsApp: pulsing ring, wiggle on hover */
+.wa-float::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; background: #25d366; z-index: -1;
+  animation: ring 2.4s ease-out infinite;
+}
+.wa-float:hover .i { animation: wiggle .5s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .reveal:not(.in) { opacity: 1; }
 }

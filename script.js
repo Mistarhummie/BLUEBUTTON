@@ -3,6 +3,9 @@ const WHATSAPP = "254728926971";
 
 const waLink = (text) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
 
+document.documentElement.classList.add("js");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 // Mobile menu
 const toggle = document.querySelector(".nav-toggle");
 const menu = document.getElementById("nav-menu");
@@ -49,8 +52,15 @@ chips.forEach((chip) => {
   chip.addEventListener("click", () => {
     chips.forEach((c) => c.classList.toggle("active", c === chip));
     const f = chip.dataset.filter;
+    let i = 0;
     document.querySelectorAll("#gallery .tile").forEach((tile) => {
       tile.hidden = f !== "all" && tile.dataset.cat !== f;
+      if (!tile.hidden) {
+        tile.classList.remove("pop");
+        void tile.offsetWidth; // restart the animation
+        tile.style.animationDelay = `${i++ * 0.06}s`;
+        tile.classList.add("pop");
+      }
     });
   });
 });
@@ -71,5 +81,48 @@ if (form) {
       f.get("details") && `Details: ${f.get("details")}`,
     ].filter(Boolean);
     window.open(waLink(lines.join("\n")), "_blank", "noopener");
+  });
+}
+
+// Scroll reveal: sections slide up as they come into view, siblings one after another
+const revealTargets = document.querySelectorAll(
+  ".section-head, .svc-card, .why-item, .aud-card, .steps li, .tile, .price-group-head, .price-item, " +
+  ".cta-band, .info-card, .map, .quote-form, .contact-card, .social-grid > *, .social-link, .filters"
+);
+if (!reduceMotion && "IntersectionObserver" in window) {
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("in");
+        io.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  );
+  revealTargets.forEach((el) => {
+    const siblings = Array.from(el.parentElement.children).filter((c) => c.matches(".reveal, " + el.tagName));
+    el.style.setProperty("--d", `${(siblings.indexOf(el) % 4) * 0.1}s`);
+    el.classList.add("reveal");
+    io.observe(el);
+  });
+}
+
+// 3D tilt and cursor glow on cards (mouse only)
+if (!reduceMotion && window.matchMedia("(hover: hover)").matches) {
+  document.querySelectorAll(".svc-card, .aud-card, .contact-card, .tile").forEach((el) => {
+    el.addEventListener("pointermove", (e) => {
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      el.style.setProperty("--rx", `${((0.5 - y) * 10).toFixed(2)}deg`);
+      el.style.setProperty("--ry", `${((x - 0.5) * 10).toFixed(2)}deg`);
+      el.style.setProperty("--mx", `${(x * 100).toFixed(1)}%`);
+      el.style.setProperty("--my", `${(y * 100).toFixed(1)}%`);
+    });
+    el.addEventListener("pointerleave", () => {
+      el.style.removeProperty("--rx");
+      el.style.removeProperty("--ry");
+    });
   });
 }
