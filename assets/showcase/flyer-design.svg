@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#001f4d"/><stop offset="1" stop-color="#00337a"/></linearGradient>
+<filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#001f4d" flood-opacity=".28"/></filter>
+<filter id="sh2" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#001f4d" flood-opacity=".22"/></filter>
+<pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.6" fill="#ffffff" opacity=".18"/></pattern>
+<pattern id="mesh" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.1" fill="#000" opacity=".18"/></pattern>
+</defs>
+<rect width="400" height="500" fill="url(#bg)"/>
+<rect width="400" height="500" fill="url(#dots)"/>
+
+<g transform="rotate(8 230 230)" filter="url(#sh)"><rect x="140" y="70" width="190" height="270" rx="8" fill="#f15a25"/><rect x="162" y="250" width="120" height="10" rx="5.0" fill="#ffffff"/><rect x="162" y="268" width="90" height="10" rx="5.0" fill="#ffffff"/><rect x="162" y="286" width="140" height="10" rx="5.0" fill="#ffffff"/><circle cx="235" cy="160" r="50" fill="#ff8a5c"/></g>
+<g transform="rotate(-6 180 230)" filter="url(#sh)">
+  <rect x="80" y="80" width="200" height="290" rx="8" fill="#ffffff"/>
+  <rect x="80" y="80" width="200" height="120" rx="8" fill="#004aad"/><rect x="80" y="180" width="200" height="20" fill="#004aad"/>
+  <circle cx="230" cy="130" r="38" fill="#f15a25"/><circle cx="230" cy="130" r="20" fill="#ffffff"/>
+  <rect x="100" y="112" width="90" height="12" rx="6.0" fill="#ffffff"/><rect x="100" y="134" width="60" height="12" rx="6.0" fill="#ffffff"/>
+  <rect x="100" y="222" width="150" height="12" rx="6.0" fill="#001f4d"/><rect x="100" y="244" width="120" height="12" rx="6.0" fill="#001f4d"/><rect x="100" y="266" width="160" height="12" rx="6.0" fill="#001f4d"/>
+  <rect x="100" y="292" width="160" height="6" rx="3.0" fill="#dbe3f0"/><rect x="100" y="305" width="140" height="6" rx="3.0" fill="#dbe3f0"/>
+  <rect x="100" y="328" width="90" height="26" rx="13" fill="#f15a25"/><g transform="translate(236 322) scale(0.3)"><rect width="100" height="100" rx="24" fill="#004aad"/><rect x="20" y="24" width="60" height="20" rx="10" fill="#ffffff"/><circle cx="70" cy="34" r="6" fill="#f15a25"/><rect x="20" y="56" width="60" height="20" rx="10" fill="#f15a25"/></g>
+</g>
+</svg>

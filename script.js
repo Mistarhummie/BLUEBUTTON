@@ -16,6 +16,14 @@ if (toggle && menu) {
   });
 }
 
+// Header turns to frosted glass after a little scrolling
+const header = document.querySelector(".site-header");
+if (header) {
+  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 40);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+}
+
 // Footer year
 document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
 
@@ -87,7 +95,8 @@ if (form) {
 // Scroll reveal: sections slide up as they come into view, siblings one after another
 const revealTargets = document.querySelectorAll(
   ".section-head, .svc-card, .why-item, .aud-card, .steps li, .tile, .price-group-head, .price-item, " +
-  ".cta-band, .info-card, .map, .quote-form, .contact-card, .social-grid > *, .social-link, .filters"
+  ".cta-band, .info-card, .map, .quote-form, .contact-card, .social-grid > *, .social-link, .filters, " +
+  ".sc-intro, .sc-feature, .sc-grid .sc-card, .presence-head, .presence-actions, .presence-contacts li"
 );
 if (!reduceMotion && "IntersectionObserver" in window) {
   const io = new IntersectionObserver(
@@ -110,7 +119,7 @@ if (!reduceMotion && "IntersectionObserver" in window) {
 
 // 3D tilt and cursor glow on cards (mouse only)
 if (!reduceMotion && window.matchMedia("(hover: hover)").matches) {
-  document.querySelectorAll(".svc-card, .aud-card, .contact-card, .tile").forEach((el) => {
+  document.querySelectorAll(".svc-card, .aud-card, .contact-card, .tile, .sc-card").forEach((el) => {
     el.addEventListener("pointermove", (e) => {
       const r = el.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width;
