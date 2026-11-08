@@ -96,7 +96,8 @@ if (form) {
 const revealTargets = document.querySelectorAll(
   ".section-head, .svc-card, .why-item, .aud-card, .steps li, .tile, .price-group-head, .price-item, " +
   ".cta-band, .info-card, .map, .quote-form, .contact-card, .social-grid > *, .social-link, .filters, " +
-  ".sc-intro, .sc-feature, .sc-grid .sc-card, .presence-head, .presence-actions, .presence-contacts li"
+  ".sc-intro, .sc-feature, .sc-grid .sc-card, .presence-head, .presence-actions, .presence-contacts li, " +
+  ".cat-head, .cat-card, .ag-card, .ag-cta"
 );
 if (!reduceMotion && "IntersectionObserver" in window) {
   const io = new IntersectionObserver(
@@ -119,7 +120,7 @@ if (!reduceMotion && "IntersectionObserver" in window) {
 
 // 3D tilt and cursor glow on cards (mouse only)
 if (!reduceMotion && window.matchMedia("(hover: hover)").matches) {
-  document.querySelectorAll(".svc-card, .aud-card, .contact-card, .tile, .sc-card").forEach((el) => {
+  document.querySelectorAll(".svc-card, .aud-card, .contact-card, .tile, .sc-card, .cat-card").forEach((el) => {
     el.addEventListener("pointermove", (e) => {
       const r = el.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width;

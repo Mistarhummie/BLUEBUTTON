@@ -6,6 +6,7 @@ Website for Bluebutton Design Solutions, a graphic design and printing studio in
 
 - `index.html`: Home
 - `services.html`: Services & Prices
+- `catalogue.html`: Full catalogue (branding, production, events, agency support)
 - `portfolio.html`: Portfolio and social links
 - `contact.html`: Quote form, hours and map
 

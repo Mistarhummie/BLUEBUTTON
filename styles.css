@@ -668,3 +668,103 @@ p { margin: 0 0 1em; }
 
 /* Keep jump links clear of the sticky header */
 .price-group, .sc-block, #quote-form { scroll-margin-top: 96px; }
+
+/* ============================================================
+   Catalogue page
+   ============================================================ */
+.cat-jump {
+  position: sticky; top: 64px; z-index: 40; background: rgba(255, 255, 255, .92);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line);
+}
+.cat-jump .container { display: flex; gap: .6rem; overflow-x: auto; padding: .8rem 0; scrollbar-width: none; }
+.cat-jump .container::-webkit-scrollbar { display: none; }
+.cat-jump a {
+  flex: none; display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; white-space: nowrap;
+  font-family: var(--head); font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--blue); border: 2px solid var(--blue); border-radius: 999px; padding: .4rem 1rem .4rem .45rem;
+  transition: background .2s, color .2s, transform .3s var(--bounce);
+}
+.cat-jump a b { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--orange); color: var(--white); font-size: .9rem; }
+.cat-jump a:hover { background: var(--blue); color: var(--white); transform: translateY(-2px); }
+
+.cat { scroll-margin-top: 130px; }
+.cat.peach { background: var(--orange-tint); }
+.cat-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem 2.5rem; align-items: start; margin-bottom: 2.5rem; max-width: 900px; }
+.cat-num {
+  font-family: var(--head); font-weight: 800; font-size: clamp(5rem, 11vw, 8.5rem); line-height: .8;
+  color: transparent; -webkit-text-stroke: 2px var(--orange); transition: color .5s var(--ease);
+}
+.cat:hover .cat-num { color: var(--orange); }
+.cat-head h2 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; margin-bottom: .6rem; }
+.cat-head p { font-size: 1.15rem; color: var(--muted); max-width: 40rem; margin-bottom: 1rem; }
+.cat-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .45rem; }
+.cat-tags li { background: var(--blue-tint); color: var(--blue); font-weight: 600; font-size: .9rem; padding: .25rem .8rem; border-radius: 999px; }
+.cat.tint .cat-tags li { background: var(--white); }
+
+.cat-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; }
+.cat-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cat-card {
+  position: relative; display: flex; flex-direction: column; background: var(--white); border: 2px solid var(--line);
+  border-radius: var(--radius); padding: 1.5rem 1.4rem 1.3rem; overflow: hidden;
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease), border-color .3s;
+}
+.cat-card::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 5px; background: var(--orange);
+  transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease);
+}
+.cat-card:hover { transform: var(--tilt) translateY(-6px); box-shadow: 0 20px 40px rgba(0, 31, 77, .16); border-color: transparent; }
+.cat-card:hover::before { transform: scaleX(1); }
+.cat-ic {
+  width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; flex: none;
+  background: var(--blue); color: var(--white); margin-bottom: 1rem; transition: transform .5s var(--bounce), background .3s;
+}
+.cat-grid li:nth-child(even) .cat-ic { background: var(--orange); }
+.cat-ic .i { width: 26px; height: 26px; }
+.cat-card:hover .cat-ic { transform: rotate(-10deg) scale(1.08); }
+.cat-card h3 { font-size: 1.45rem; margin-bottom: .35rem; }
+.cat-card p { color: var(--muted); font-size: .98rem; margin-bottom: 1.1rem; }
+.cat-foot { margin-top: auto; padding-top: .9rem; border-top: 1px dashed var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem .8rem; }
+.cat-foot .price { font-size: 1.15rem; }
+.cols-3 .cat-card { padding: 1.9rem 1.8rem 1.6rem; }
+.cols-3 .cat-card h3 { font-size: 1.75rem; }
+
+/* Agencies: deep blue band */
+.cat-agency {
+  color: var(--white);
+  background:
+    radial-gradient(circle at 88% 12%, rgba(241, 90, 37, .25), transparent 40%),
+    radial-gradient(rgba(255, 255, 255, .08) 1.4px, transparent 1.7px) 0 0 / 16px 16px,
+    var(--blue);
+}
+.cat-agency .eyebrow { color: #ffd2c0; }
+.cat-agency .cat-head p { color: #d8e5ff; }
+.cat-agency .cat-num { -webkit-text-stroke-color: rgba(255, 255, 255, .55); }
+.cat-agency:hover .cat-num { color: var(--white); }
+.ag-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; }
+.ag-card {
+  display: flex; gap: 1rem; align-items: flex-start; padding: 1.3rem; border-radius: var(--radius);
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); transition: background .3s, transform .4s var(--ease);
+}
+.ag-card:hover { background: rgba(255, 255, 255, .15); transform: translateY(-4px); }
+.ag-card .cat-ic { margin: 0; background: var(--orange); }
+.ag-card h3 { font-size: 1.4rem; margin-bottom: .25rem; }
+.ag-card p { margin: 0; color: #d8e5ff; font-size: .98rem; }
+.ag-cta { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: .7rem; padding: 1.3rem; }
+.ag-cta p { margin: 0; font-family: var(--head); font-weight: 700; font-size: 1.5rem; }
+
+@media (max-width: 1000px) {
+  .cat-grid, .cat-grid.cols-3, .ag-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .cat-jump { top: 0; position: relative; }
+  .cat-head { grid-template-columns: minmax(0, 1fr); gap: .2rem; }
+  .cat-num { font-size: 4.5rem; }
+  .cat-grid, .cat-grid.cols-3, .ag-grid { grid-template-columns: minmax(0, 1fr); }
+  .cat-grid { gap: .8rem; }
+  .cat-card, .cols-3 .cat-card { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 1rem; padding: 1.1rem 1.1rem 1rem; }
+  .cat-card .cat-ic { width: 46px; height: 46px; border-radius: 14px; margin: 0; grid-row: span 2; }
+  .cat-card .cat-ic .i { width: 22px; height: 22px; }
+  .cat-card h3, .cols-3 .cat-card h3 { font-size: 1.3rem; margin-bottom: .15rem; }
+  .cat-card p { margin-bottom: .6rem; font-size: .95rem; }
+  .cat-foot { grid-column: 1 / -1; padding-top: .7rem; }
+}
