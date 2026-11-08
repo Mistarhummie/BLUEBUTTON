@@ -5,7 +5,7 @@ Website for Bluebutton Design Solutions, a graphic design and printing studio in
 ## Pages
 
 - `index.html`: Home
-- `services.html`: Services & Prices
+- `services.html`: Old address, now forwards to the catalogue
 - `catalogue.html`: Full catalogue (branding, production, events, agency support)
 - `portfolio.html`: Portfolio and social links
 - `contact.html`: Quote form, hours and map
@@ -14,7 +14,7 @@ Shared styles are in `styles.css`, behaviour (mobile menu, open/closed badge, Wh
 
 ## Common edits
 
-**Add prices.** In `services.html`, change `Ask for price` next to a service to something like `From KES 1,500`.
+**Add prices.** In `catalogue.html`, change `Ask for price` next to a service to something like `From KES 1,500`.
 
 **Add portfolio photos.** Put photos in `assets/work/`, then in `portfolio.html` (and the three tiles on `index.html`) replace a tile's `<div class="ph">…</div>` with:
 
