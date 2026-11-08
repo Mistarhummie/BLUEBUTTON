@@ -35,4 +35,4 @@ Run `python3 -m http.server` in this folder and open http://localhost:8000.
 
 ## Publish with GitHub Pages
 
-On GitHub, open Settings → Pages, set Source to "Deploy from a branch", pick the branch and `/ (root)`, then Save. The site goes live at https://mistarhummie.github.io/BLUEBUTTON/. A custom domain such as bluebutton.co.ke can be added later on the same settings page.
+On GitHub, open Settings → Pages, set Source to "Deploy from a branch", pick the branch and `/ (root)`, then Save. The site is served at https://www.bluebuttonsolutions.business/ (custom domain set by the `CNAME` file; DNS is managed at Porkbun). Keep "Enforce HTTPS" ticked on the Pages settings page.
