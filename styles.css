@@ -823,3 +823,25 @@ p { margin: 0 0 1em; }
 /* Icon badge sits under the photo instead of covering its corner */
 .cat-media + .cat-ic { margin-top: 1rem; border: 0; }
 @media (max-width: 600px) { .cat-card .cat-media + .cat-ic { margin-top: .9rem; } }
+
+/* Captions sit under the photos, so no label or button ever covers part of a picture */
+.sc-card { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem .6rem; background: var(--blue-deep); padding-bottom: .8rem; }
+.sc-card img { flex: 0 0 100%; }
+.sc-card img.alt { inset: 0 0 auto 0; height: auto; }
+.sc-card::after { display: none; }
+.sc-label, .sc-feature .sc-label {
+  position: static; transform: none !important; width: auto; max-width: none; flex: 1 1 auto;
+  padding: 0 0 0 .95rem; border: 0; border-radius: 0; background: none !important; text-align: left;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.sc-cta { position: static; opacity: 1; transform: none !important; margin: 0 .8rem 0 .95rem; font-size: .85rem; padding: .35rem .85rem; }
+.sc-card:hover .sc-cta { background: var(--orange-dark); }
+.tile { aspect-ratio: auto; flex-direction: column; align-items: stretch; }
+.tile img { position: static; height: auto; aspect-ratio: 1 / 1; }
+.tile figcaption { padding: .85rem 1.1rem; background: none; }
+.tile:hover figcaption { padding-bottom: .85rem; }
+@media (max-width: 600px) {
+  .sc-label { padding-left: .75rem; }
+  .sc-cta { margin-left: .75rem; font-size: .8rem; }
+}
+.sc-grid .sc-label { flex-basis: 100%; }
