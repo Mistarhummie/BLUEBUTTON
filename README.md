@@ -16,7 +16,7 @@ Shared styles are in `styles.css`, behaviour (mobile menu, open/closed badge, Wh
 
 **Add prices.** In `catalogue.html`, change `Ask for price` next to a service to something like `From KES 1,500`.
 
-**Add portfolio photos.** Put photos in `assets/work/`, then in `portfolio.html` (and the three tiles on `index.html`) replace a tile's `<div class="ph">…</div>` with:
+**Add portfolio photos.** Portfolio photos are square and live in `assets/work/`. To add another, copy one `<figure class="tile" ...>` line in `portfolio.html` and change its photo and caption, for example:
 
 ```html
 <img src="assets/work/business-cards.jpg" alt="Business cards for a client" loading="lazy">
@@ -24,7 +24,7 @@ Shared styles are in `styles.css`, behaviour (mobile menu, open/closed badge, Wh
 
 Keep photos under about 300 KB each so pages load fast on mobile data.
 
-**Swap the home page illustrations for real photos.** The "What we do" cards on the home page use drawings from `assets/showcase/`. To use a photo instead, save it in that folder (for example `business-cards.jpg`) and change the matching `src="assets/showcase/business-cards.svg"` in `index.html` to the new file name. Portrait photos (4:5) suit the small cards and landscape photos (5:4) suit the four large ones.
+**Change a home page photo.** The "What we do" cards on the home page use photos from `assets/home/`. To change one, save the new photo over the old file with the same name (for example `assets/home/business-cards.jpg`). Portrait photos (4:5) suit the small cards and landscape photos (5:4) suit the four large ones. A file ending in `-2.jpg` is the second photo that fades in when you hover over the card.
 
 **Change the WhatsApp number.** Update `WHATSAPP` at the top of `script.js` and the `wa.me` links in the HTML.
 

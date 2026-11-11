@@ -806,3 +806,7 @@ p { margin: 0 0 1em; }
   .cat-card .cat-media + .cat-ic { width: 46px; height: 46px; margin-top: -23px; margin-bottom: .7rem; }
   .cat-media, .cols-5 .cat-card:nth-child(n+4) .cat-media { aspect-ratio: 16 / 10; }
 }
+
+/* Home showcase: second photo fades in on hover */
+.sc-card img.alt { position: absolute; inset: 0; height: 100%; opacity: 0; transition: opacity .6s var(--ease), transform .8s var(--ease); }
+.sc-card:hover img.alt, .sc-card:focus-visible img.alt { opacity: 1; }
