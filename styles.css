@@ -848,3 +848,29 @@ p { margin: 0 0 1em; }
 
 /* Photos are cropped to fill their frames again (no blurred bands) */
 .cat-media img, .sc-card img, .tile img { object-fit: cover; }
+
+/* Home 01 Graphic design: taller cards hold two photos, one above the other */
+#sc-design .sc-grid img { aspect-ratio: 2 / 3; }
+
+/* Catalogue: portrait photos (structural works, power) sit beside the text so they show almost in full */
+.cat-card.split {
+  grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  grid-template-rows: auto auto auto 1fr; column-gap: 2rem; padding: 0 1.8rem 0 0; align-content: start;
+}
+.cols-5 .cat-card.split:nth-child(n+4) { grid-column: span 3; }
+.cat-card.split .cat-media, .cols-5 .cat-card.split:nth-child(n+4) .cat-media { grid-row: 1 / -1; margin: 0; aspect-ratio: 3 / 4; }
+.cat-card.split .cat-media + .cat-ic { margin-top: 1.8rem; }
+.cat-card.split .cat-foot { margin-bottom: 1.6rem; align-self: end; }
+@media (max-width: 1100px) {
+  .cat-card.split { grid-template-columns: minmax(0, 230px) minmax(0, 1fr); column-gap: 1.4rem; }
+}
+@media (max-width: 1000px) {
+  .cols-5 .cat-card.split, .cols-5 .cat-card.split:nth-child(n+4), .cols-5 .cat-card.split:last-child { grid-column: 1 / -1; }
+  .cat-card.split { grid-template-columns: minmax(0, 260px) minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .cat-card.split, .cols-5 .cat-card.split { display: flex; flex-direction: column; padding: 0 var(--px) 1rem; }
+  .cat-card.split .cat-media, .cols-5 .cat-card.split:nth-child(n+4) .cat-media { margin: 0 calc(-1 * var(--px)); aspect-ratio: 3 / 4; }
+  .cat-card.split .cat-media + .cat-ic { margin-top: .9rem; }
+  .cat-card.split .cat-foot { margin-bottom: 0; align-self: stretch; }
+}
