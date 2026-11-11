@@ -810,3 +810,16 @@ p { margin: 0 0 1em; }
 /* Home showcase: second photo fades in on hover */
 .sc-card img.alt { position: absolute; inset: 0; height: 100%; opacity: 0; transition: opacity .6s var(--ease), transform .8s var(--ease); }
 .sc-card:hover img.alt, .sc-card:focus-visible img.alt { opacity: 1; }
+
+/* Show every photo in full: photos are pre-sized to their frame, so keep frames fixed and never zoom them */
+.cols-5 .cat-card:nth-child(n+4) .cat-media { aspect-ratio: 4 / 3; }
+.cat-media img, .sc-card img, .tile img { object-fit: contain; }
+.cat-card:hover .cat-media img,
+.sc-card:hover img, .sc-card:focus-visible img,
+.tile:hover img { transform: none; }
+@media (max-width: 600px) {
+  .cat-media, .cols-5 .cat-card:nth-child(n+4) .cat-media { aspect-ratio: 4 / 3; }
+}
+/* Icon badge sits under the photo instead of covering its corner */
+.cat-media + .cat-ic { margin-top: 1rem; border: 0; }
+@media (max-width: 600px) { .cat-card .cat-media + .cat-ic { margin-top: .9rem; } }
