@@ -845,3 +845,6 @@ p { margin: 0 0 1em; }
   .sc-cta { margin-left: .75rem; font-size: .8rem; }
 }
 .sc-grid .sc-label { flex-basis: 100%; }
+
+/* Photos are cropped to fill their frames again (no blurred bands) */
+.cat-media img, .sc-card img, .tile img { object-fit: cover; }
